@@ -1,0 +1,73 @@
+name: "ensemble"
+platform: "ensemble"
+max_batch_size: 1
+
+input [
+  {
+    name: "images"
+    data_type: TYPE_FP32
+    dims: [3, 640, 640]
+  }
+]
+
+output [
+  {
+    name: "final_output"
+    data_type: TYPE_FP32
+    dims: [3]
+  }
+]
+
+ensemble_scheduling {
+  step [
+    {
+      model_name: "segmentation"
+      model_version: -1
+      input_map {
+        key: "images"
+        value: "images"
+      }
+      output_map {
+        key: "output0"
+        value: "detection_out"
+      }
+      output_map {
+        key: "output1"
+        value: "mask_out"
+      }
+    },
+    {
+      model_name: "postprocess_classifier"
+      model_version: -1
+      input_map {
+        key: "image"
+        value: "images"
+      }
+      input_map {
+        key: "output0"
+        value: "detection_out"
+      }
+      input_map {
+        key: "output1"
+        value: "mask_out"
+      }
+      output_map {
+        key: "resnet_input"
+        value: "resnet_input"
+      }
+    },
+    {
+      model_name: "resnet_classifier"
+      model_version: -1
+      input_map {
+        key: "input"
+        value: "resnet_input"
+      }
+      output_map {
+        key: "output"
+        value: "final_output"
+      }
+    }
+  ]
+}
+

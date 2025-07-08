@@ -1,0 +1,43 @@
+name: "segmentation"
+platform: "tensorrt_plan"
+max_batch_size: 1
+
+input [
+  {
+    name: "images"
+    data_type: TYPE_FP32
+    dims: [3, 640, 640]
+  }
+]
+
+output [
+  {
+    name: "output0"
+    data_type: TYPE_FP32
+    dims: [37, -1]  # 37 = 4 bbox + 1 obj + 32 mask coeffs
+  },
+  {
+    name: "output1"
+    data_type: TYPE_FP32
+    dims: [32, -1, -1]  # segmentation masks [32, mask_h, mask_w]
+  }
+]
+
+instance_group [
+  {
+    count: 4
+    kind: KIND_GPU
+    gpus: [ 0 ]
+  }
+]
+
+version_policy: {
+  latest {
+    num_versions: 1
+  }
+}
+
+dynamic_batching {
+  max_queue_delay_microseconds: 0
+}
+
