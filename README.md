@@ -194,12 +194,21 @@ Required dependencies (install inside Tritonserver Docker to start the server):
 ```bash
 apt-get update && apt-get install ffmpeg libsm6 libxext6 -y
 pip install opencv-python
+```
+## 🎥 Inference Demo
 
----
+For a visual walkthrough of the complete inference pipeline—from segmentation to classification—refer to the following demo:
 
-## 🎬 Demo
+![Demo](https://github.com/TejasARathod/AgriDoc-PlantDiseaseClassification-Triton/blob/e553f7b4621790df58365aecc429a5ea554cda9b/Demo.gif?raw=true)
 
-See `Demo.gif` for an end-to-end pipeline walkthrough.
+This animation demonstrates the model's ability to:
+
+1. Accept an image input.
+2. Perform YOLOv8-based segmentation to isolate the leaf region.
+3. Process the segmented crop through a ResNet-50 classifier.
+4. Return the final predicted disease label.
+
+It illustrates the practical utility of deploying a multi-stage pipeline using Triton Inference Server in a modular and scalable fashion.
 
 
 
