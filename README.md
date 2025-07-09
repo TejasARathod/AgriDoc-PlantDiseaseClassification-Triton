@@ -1,8 +1,20 @@
-# 🍃 Leaf Disease Classification using Triton Inference Server and Grad-CAM
+# 🍃 Leaf Disease Classification using Triton Inference Server and XAI
 
 ![Triton Workflow](Triton_Workflow.png)
 
 This project demonstrates an end-to-end workflow for segmenting and classifying plant leaf diseases using a YOLOv8 segmentation model, ResNet-50 classifier, and NVIDIA Triton Inference Server. The entire pipeline is production-ready and simulates real-world conditions where leaves need to be segmented before classification due to non-uniform backgrounds.
+
+## 📚 Table of Contents
+
+- [🔍 Motivation](#-motivation)
+- [📦 Environment Setup](#-environment-setup)
+- [🧪 Dataset](#-dataset)
+- [🧩 YOLOv8 Segmentation (Ultralytics)](#-yolov8-segmentation-ultralytics)
+- [🧪 TensorRT Conversion (inside Tritonserver Docker)](#-tensorrt-conversion-inside-tritonserver-docker)
+- [📊 Embedding Visualization & Pipeline Planning](#-embedding-visualization--pipeline-planning)
+- [🧪 Classification with ResNet-50](#-classification-with-resnet-50)
+- [🚀 Triton Inference Server](#-triton-inference-server)
+- [🎥 Inference Demo](#-inference-demo)
 
 ---
 
